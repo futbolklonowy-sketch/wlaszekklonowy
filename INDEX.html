@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Uczelnia Biznesu i Nauk Stosowanych „Varsovia” — Strona przykładowa</title>
+  <meta name="description" content="Przykładowa strona uczelni Varsovia: kierunki, aktualności, webinary, filie i kontakt." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f1a;
+      --bg-soft:#111628;
+      --card:#141b2f;
+      --text:#eef2ff;
+      --muted:#b8c1ff;
+      --brand:#5b7cff;
+      --brand-2:#34d399;
+      --accent:#f59e0b;
+      --danger:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:14px;
+      --radius-sm:10px;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    header{
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter:saturate(1.2) blur(8px);
+      background:linear-gradient(180deg, rgba(11,15,26,.85), rgba(11,15,26,.55));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0;
+    }
+    .brand{display:flex; gap:12px; align-items:center}
+    .brand svg{width:42px; height:42px}
+    .brand h1{font-size:18px; margin:0; line-height:1.2}
+    .brand h1 span{display:block; font-weight:400; color:var(--muted); font-size:12px}
+    .menu{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+    .menu a{
+      padding:8px 12px; border-radius:10px; font-weight:600; color:var(--muted);
+    }
+    .menu a.active, .menu a:hover{color:var(--text); background:rgba(255,255,255,.06)}
+    .cta{
+      display:flex; gap:10px; align-items:center
+    }
+    .btn{
+      padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(20,27,47,.9), rgba(20,27,47,.7));
+      color:var(--text); font-weight:700; box-shadow:var(--shadow); cursor:pointer
+    }
+    .btn.brand{background:linear-gradient(120deg, var(--brand), var(--brand-2)); border-color:transparent}
+    .btn.ghost{background:transparent}
+    .hero{
+      position:relative; padding:64px 0 40px;
+      background:
+        radial-gradient(1000px 400px at 20% -50%, rgba(91,124,255,.25), transparent 60%),
+        radial-gradient(800px 350px at 85% 0%, rgba(52,211,153,.18), transparent 60%);
+    }
+    .grid-hero{
+      display:grid; grid-template-columns:1.15fr .85fr; gap:28px; align-items:center;
+    }
+    @media (max-width:980px){ .grid-hero{grid-template-columns:1fr} }
+    .card{
+      background:var(--card); border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+    .hero .lead{
+      padding:28px; border-radius:var(--radius);
+    }
+    .kicker{color:var(--brand-2); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:12px; margin-bottom:10px}
+    h2{font-size:36px; line-height:1.15; margin:0 0 10px}
+    .sub{color:var(--muted); font-size:16px}
+    .hero-actions{display:flex; gap:12px; margin-top:18px; flex-wrap:wrap}
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.06); color:var(--muted); font-weight:600; margin-right:8px; margin-top:8px
+    }
+    .illus{
+      position:relative; padding:20px;
+    }
+    .illus .scene{
+      aspect-ratio: 16/10; border-radius: var(--radius); overflow:hidden; border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, #10172a, #0b1225);
+      position:relative;
+    }
+    .chip{
+      position:absolute; backdrop-filter: blur(6px);
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+      color:var(--text); padding:8px 10px; border-radius:12px; font-size:12px; display:flex; align-items:center; gap:8px;
+    }
+    .chip svg{width:16px; height:16px}
+    .chip1{top:14px; left:14px}
+    .chip2{bottom:14px; right:14px}
+    .chip3{top:50%; left:50%; transform:translate(-50%,-50%)}
+    section{padding:40px 0}
+    .section-head{display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:18px}
+    .section-head h3{margin:0; font-size:26px}
+    .cards{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+    @media (max-width:1100px){ .cards{grid-template-columns:repeat(3,1fr)} }
+    @media (max-width:780px){ .cards{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:520px){ .cards{grid-template-columns:1fr} }
+    .card-item{overflow:hidden}
+    .card-item .thumb{
+      height:120px; background:linear-gradient(120deg, rgba(91,124,255,.18), rgba(245,158,11,.18));
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .card-item .thumb svg{width:60px; height:60px}
+    .card-item .body{padding:16px}
+    .card-item .body h4{margin:0 0 8px; font-size:18px}
+    .card-item .body p{margin:0; color:var(--muted)}
+    .card-item .body .more{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
+    .pill{padding:8px 10px; border:1px solid rgba(255,255,255,.12); border-radius:10px; font-weight:600; color:var(--text)}
+    .pill:hover{background:rgba(255,255,255,.06)}
+    .news{display:grid; grid-template-columns:1.2fr .8fr; gap:18px}
+    @media (max-width:980px){ .news{grid-template-columns:1fr} }
+    .list{display:flex; flex-direction:column; gap:12px}
+    .list .row{
+      display:flex; gap:12px; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03);
+    }
+    .row .dot{width:20px; height:20px; border-radius:50%; background:linear-gradient(120deg, var(--brand), var(--accent))}
+    .row .info{flex:1}
+    .row .info .title{font-weight:700}
+    .row .info .meta{color:var(--muted); font-size:13px; margin-top:4px}
+    .aside{
+      padding:16px;
+    }
+    .aside .box{
+      padding:16px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); margin-bottom:14px
+    }
+    .quiz{display:grid; grid-template-columns:.8fr 1.2fr; gap:18px}
+    @media (max-width:980px){ .quiz{grid-template-columns:1fr} }
+    .form-row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width:680px){ .form-row{grid-template-columns:1fr} }
+    label{display:block; font-weight:600; color:var(--muted); margin-bottom:6px}
+    input, select, textarea{
+      width:100%; padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,.12);
+      background:#0f1526; color:var(--text)
+    }
+    input::placeholder, textarea::placeholder{color:#8891c9}
+    .filie{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    @media (max-width:980px){ .filie{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:620px){ .filie{grid-template-columns:1fr} }
+    .filia{padding:14px}
+    .filia h4{margin:0 0 6px}
+    .filia .meta{color:var(--muted)}
+    footer{
+      margin-top:30px; padding:30px 0; border-top:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(20,27,47,.7), rgba(11,15,26,.9));
+    }
+    .foot-grid{display:grid; grid-template-columns:1.3fr .7fr; gap:18px}
+    @media (max-width:980px){ .foot-grid{grid-template-columns:1fr} }
+    .mini{font-size:13px; color:#99a2da}
+    .links{display:flex; gap:12px; flex-wrap:wrap}
+    /* Simple slider */
+    .slider{position:relative; overflow:hidden; border-radius:var(--radius); border:1px solid rgba(255,255,255,.08)}
+    .slides{display:flex; transition:transform .4s ease}
+    .slide{min-width:100%; padding:24px; background:linear-gradient(180deg, #0f172a, #0b1325)}
+    .slide h4{margin:0 0 6px}
+    .slider-controls{position:absolute; inset:auto 12px 12px 12px; display:flex; gap:8px; justify-content:flex-end}
+    .ctrl{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); color:var(--text); padding:8px 10px; border-radius:10px; cursor:pointer}
+    /* Anchor targets spacing */
+    .anchor{position:relative; top:-90px}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap nav">
+      <a href="#home" class="brand" aria-label="Strona główna">
+        <!-- Proste logo w SVG -->
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#5b7cff"/>
+              <stop offset="1" stop-color="#34d399"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="30" fill="url(#g1)" opacity=".25"/>
+          <path d="M12 42 L22 22 L32 34 L42 20 L52 42" fill="none" stroke="url(#g1)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="22" cy="22" r="3" fill="#5b7cff"/>
+          <circle cx="42" cy="20" r="3" fill="#34d399"/>
+        </svg>
+        <h1>Uczelnia Biznesu i Nauk Stosowanych
+          <span>„Varsovia” — wersja demonstracyjna</span>
+        </h1>
+      </a>
+
+      <nav class="menu" aria-label="Główne menu">
+        <a href="#kierunki" class="active">Kierunki</a>
+        <a href="#aktualnosci">Aktualności</a>
+        <a href="#webinary">Webinary</a>
+        <a href="#ebook">E-book</a>
+        <a href="#quiz">Quiz kierunkowy</a>
+        <a href="#filie">Filie</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <div class="cta">
+        <a href="#aplikuj" class="btn brand">Aplikuj teraz</a>
+        <a href="#rekrutacja" class="btn ghost">Rekrutacja</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero wrap">
+      <div class="grid-hero">
+        <div class="lead card">
+          <div class="kicker">Studia I i II stopnia • Jednolite magisterskie • Podyplomowe</div>
+          <h2>Rozwijaj się w biznesie i naukach stosowanych</h2>
+          <p class="sub">Nowoczesne programy, praktyczne specjalizacje i wsparcie ekspertów. Dołącz do społeczności, która łączy teorię z realnym doświadczeniem.</p>
+          <div class="hero-actions">
+            <a href="#kierunki" class="btn brand">Zobacz kierunki</a>
+            <a href="#webinary" class="btn">Sprawdź webinary</a>
+            <a href="#aktualnosci" class="btn ghost">Aktualności</a>
+          </div>
+          <div style="margin-top:16px">
+            <span class="tag">Akredytacje uczelniane</span>
+            <span class="tag">Partnerstwa biznesowe</span>
+            <span class="tag">Mentoring i praktyki</span>
+          </div>
+        </div>
+
+        <div class="illus card" aria-hidden="true">
+          <div class="scene">
+            <!-- Dekoracyjne elementy „dashboard” -->
+            <div class="chip chip1">
+              <!-- ikona -->
+              <svg viewBox="0 0 24 24"><path d="M4 12h16M4 6h16M4 18h16" stroke="#5b7cff" fill="none" stroke-width="2"/></svg>
+              Panel studenta
+            </div>
+            <div class="chip chip2">
+              <svg viewBox="0 0 24 24"><path d="M12 3l7 4v6c0 5-7 8-7 8s-7-3-7-8V7l7-4z" stroke="#34d399" fill="none" stroke-width="2"/></svg>
+              Biblioteka online
+            </div>
+            <div class="chip chip3">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#f59e0b" fill="none" stroke-width="2"/><path d="M12 7v6l4 2" stroke="#f59e0b" fill="none" stroke-width="2" stroke-linecap="round"/></svg>
+              Harmonogram zajęć
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kierunki -->
+    <div id="kierunki" class="anchor"></div>
+    <section class="wrap">
+      <div class="section-head">
+        <h3>Kierunki i specjalności</h3>
+        <div class="links">
+          <a class="pill" href="#aplikuj">Aplikuj</a>
+          <a class="pill" href="#rekrutacja">Rekrutacja</a>
+        </div>
+      </div>
+      <div class="cards">
+        <!-- Psychologia -->
+        <article class="card card-item">
+          <div class="thumb">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20 28c0-8 6-14 14-14s14 6 14 14c0 10-8 14-14 18v6" stroke="#5b7cff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+          </div>
+          <div class="body">
+            <h4>Psychologia</h4>
+            <p>Studia jednolite magisterskie. Praktyka, warsztaty i projekty z obszaru zdrowia psychicznego i organizacji.</p>
+            <div class="more">
+              <a class="pill" href="#aplikuj">Aplikuj</a>
+              <a class="pill" href="#kontakt">Zapytaj</a>
+            </div>
+          </div>
+        </article>
+        <!-- Prawo -->
+        <article class="card card-item">
+          <div class="thumb">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 26h28l-4 22H22l-4-22zM18 20h28" stroke="#34d399" stroke-width="3" fill="none"/></svg>
+          </div>
+          <div class="body">
+            <h4>Prawo</h4>
+            <p>Jednolite magisterskie. Nauka prawa z akcentem na praktykę, case studies i symulacje rozpraw.</p>
+            <div class="more">
+              <a class="pill" href="#aplikuj">Aplikuj</a>
+              <a class="pill" href="#kontakt">Zapytaj</a>
+            </div>
+          </div>
+        </article>
+        <!-- Zarządzanie -->
+        <article class="card card-item">
+          <div class="thumb">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M16 40c6-10 12-10 20-6s14 4 16-6" stroke="#f59e0b" stroke-width="3" fill="none"/><circle cx="16" cy="40" r="3" fill="#f59e0b"/><circle cx="36" cy="34" r="3" fill="#f59e0b"/><circle cx="52" cy="28" r="3" fill="#f59e0b"/></svg>
+          </div>
+          <div class="body">
+            <h4>Zarządzanie</h4>
+            <p>Studia I i II stopnia. Strategia, marketing, finanse i transformacja cyfrowa w praktyce.</p>
+            <div class="more">
+              <a class="pill" href="#aplikuj">Aplikuj</a>
+              <a class="pill" href="#kontakt">Zapytaj</a>
+            </div>
+          </div>
+        </article>
+        <!-- Media -->
+        <article class="card card-item">
+          <div class="thumb">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="18" width="36" height="28" rx="4" stroke="#5b7cff" stroke-width="3" fill="none"/><path d="M24 32l10 6V26l-10 6z" fill="#5b7cff"/></svg>
+          </div>
+          <div class="body">
+            <h4>Media i komunikacja</h4>
+            <p>Studia I i II stopnia. Produkcja, strategie contentowe, analityka i narzędzia AI.</p>
+            <div class="more">
+              <a class="pill" href="#aplikuj">Aplikuj</a>
+              <a class="pill" href="#kontakt">Zapytaj</a>
+            </div>
+          </div>
+        </article>
+        <!-- Administracja -->
+        <article class="card card-item">
+          <div class="thumb">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 20h28v24H18z" stroke="#34d399" stroke-width="3" fill="none"/><path d="M24 24h16M24 30h16M24 36h12" stroke="#34d399" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h4>Administracja</h4>
+            <p>Studia I i II stopnia. Prawo administracyjne, zarządzanie publiczne i cyfrowe procesy.</p>
+            <div class="more">
+              <a class="pill" href="#aplikuj">Aplikuj</a>
+              <a class="pill" href="#kontakt">Zapytaj</a>
+            </div>
+          </div>
+        </article>
+        <!-- Pedagogika -->
+        <article class="card card-item">
+          <div class="thumb">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 26l20-10 20 10-20 10-20-10zM32 36v14" stroke="#5b7cff" stroke-width="3" fill="none"/></svg>
+          </div>
+          <div class="body">
+            <h4>Pedagogika</h4>
+            <p>Studia I i II stopnia oraz wczesnoszkolna. Praktyka dydaktyczna i nowoczesne metody.</p>
+            <div class="more">
+              <a class="pill" href="#aplikuj">Aplikuj</a>
+              <a class="pill" href="#kontakt">Zapytaj</a>
+            </div>
+          </div>
+        </article>
+        <!-- Kryminologia -->
+        <article class="card card-item">
+          <div class="thumb">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="30" cy="30" r="14" stroke="#f59e0b" stroke-width="3" fill="none"/><path d="M42 42l10 10" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+          <div class="body">
+            <h4>Kryminologia</h4>
+            <p>Studia I i II stopnia. Analiza, bezpieczeństwo i techniki dochodzeniowe.</p>
+            <div class="more">
+              <a class="pill" href="#aplikuj">Aplikuj</a>
+              <a class="pill" href="#kontakt">Zapytaj</a>
+            </div>
+          </div>
+        </article>
+        <!-- Bezpieczeństwo -->
+        <article class="card card-item">
+          <div class="thumb">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 10l18 8v10c0 12-10 20-18 24-8-4-18-12-18-24V18l18-8z" stroke="#34d399" stroke-width="3" fill="none"/></svg>
+          </div>
+          <div class="body">
+            <h4>Bezpieczeństwo</h4>
+            <p>Studia I i II stopnia. Systemy bezpieczeństwa, polityka i praktyka operacyjna.</p>
+            <div class="more">
+              <a class="pill" href="#aplikuj">Aplikuj</a>
+              <a class="pill" href="#kontakt">Zapytaj</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Aktualności -->
+    <div id="aktualnosci" class="anchor"></div>
+    <section class="wrap">
+      <div class="section-head">
+        <h3>Aktualności i komunikaty</h3>
+        <div class="links">
+          <a class="pill" href="#archiwum">Archiwum</a>
+          <a class="pill" href="#kontakt">Biuro prasowe</a>
+        </div>
+      </div>
+      <div class="news">
+        <div class="list">
+          <div class="row">
+            <div class="dot"></div>
+            <div class="info">
+              <div class="title">Inauguracja roku akademickiego</div>
+              <div class="meta">Wydarzenia • 12 paź 2025</div>
+            </div>
+            <a class="pill" href="#czytaj">Czytaj</a>
+          </div>
+          <div class="row">
+            <div class="dot"></div>
+            <div class="info">
+              <div class="title">Współpraca z partnerem zagranicznym</div>
+              <div class="meta">Partnerstwa • 05 paź 2025</div>
+            </div>
+            <a class="pill" href="#czytaj">Czytaj</a>
+          </div>
+          <div class="row">
+            <div class="dot"></div>
+            <div class="info">
+              <div class="title">Sesja ekspercka na konferencji</div>
+              <div class="meta">Konferencje • 22 wrz 2025</div>
+            </div>
+            <a class="pill" href="#czytaj">Czytaj</a>
+          </div>
+        </div>
+        <aside class="aside card">
+          <div class="box">
+            <div class="kicker">Komunikat</div>
+            <strong>Zmiany w harmonogramie zajęć</strong>
+            <p class="mini">Informacja organizacyjna dotycząca wybranych kierunków. Szczegóły w panelu studenta.</p>
+            <a href="#panel" class="pill" style="margin-top:8px">Przejdź do panelu</a>
+          </div>
+          <div class="box">
+            <div class="kicker">Ogłoszenie</div>
+            <strong>Rekrutacja zimowa</strong>
+            <p class="mini">Trwa nabór na studia I i II stopnia oraz studia podyplomowe.</p>
+            <a href="#rekrutacja" class="pill" style="margin-top:8px">Zasady rekrutacji</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Webinary i slider -->
+    <div id="webinary" class="anchor"></div>
+    <section class="wrap">
+      <div class="section-head">
+        <h3>Webinary i wydarzenia online</h3>
+        <div class="links">
+          <a class="pill" href="#zapisy">Zapisy</a>
+          <a class="pill" href="#certyfikaty">Certyfikaty</a>
+        </div>
+      </div>
+      <div class="slider card" id="slider">
+        <div class="slides">
+          <div class="slide">
+            <h4>Psychologia sukcesu: motywacja i nawyki</h4>
+            <p class="mini">Spotkanie online z praktycznymi narzędziami wzmacniającymi odporność psychiczną.</p>
+            <a class="pill" href="#zapisy">Zapisz się</a>
+          </div>
+          <div class="slide">
+            <h4>Media na nowo: algorytmy i AI</h4>
+            <p class="mini">Wpływ sztucznej inteligencji na tworzenie i dystrybucję treści.</p>
+            <a class="pill" href="#zapisy">Zapisz się</a>
+          </div>
+          <div class="slide">
+            <h4>Ochrona prawna służb</h4>
+            <p class="mini">Przegląd wybranych zagadnień dotyczących bezpieczeństwa i ochrony prawnej.</p>
+            <a class="pill" href="#zapisy">Zapisz się</a>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="ctrl" data-dir="-1" aria-label="Poprzedni">‹</button>
+          <button class="ctrl" data-dir="1" aria-label="Następny">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- E-book -->
+    <div id="ebook" class="anchor"></div>
+    <section class="wrap card">
+      <div class="section-head" style="padding:16px 16px 0;">
+        <h3>Bezpłatny e-book kierunkowy</h3>
+      </div>
+      <div style="padding:0 16px 16px">
+        <p class="mini">Pobierz przykładowy e-book o kierunku, aby sprawdzić, czy to dobry wybór dla Ciebie.</p>
+        <form onsubmit="event.preventDefault(); alert('Dziękujemy! Link do e-booka został wysłany na podany adres e-mail.');">
+          <div class="form-row">
+            <div>
+              <label>Imię</label>
+              <input type="text" placeholder="Jan" required>
+            </div>
+            <div>
+              <label>Nazwisko</label>
+              <input type="text" placeholder="Kowalski" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label>E-mail</label>
+              <input type="email" placeholder="jan.kowalski@example.com" required>
+            </div>
+            <div>
+              <label>Numer telefonu</label>
+              <input type="tel" placeholder="+48 600 000 000">
+            </div>
+          </div>
+          <div>
+            <label>Wybierz kierunek</label>
+            <select required>
+              <option value="" selected disabled>— wybierz —</option>
+              <option>Psychologia</option>
+              <option>Prawo</option>
+              <option>Zarządzanie</option>
+              <option>Media i komunikacja</option>
+              <option>Administracja</option>
+              <option>Pedagogika</option>
+              <option>Kryminologia</option>
+              <option>Bezpieczeństwo</option>
+            </select>
+          </div>
+          <div style="margin-top:10px; display:flex; gap:12px; align-items:center; flex-wrap:wrap">
+            <label style="display:flex; gap:8px; align-items:center"><input type="checkbox" required> Wyrażam zgodę na przetwarzanie danych w celu obsługi zgłoszenia.</label>
+            <label style="display:flex; gap:8px; align-items:center"><input type="checkbox"> Zgoda marketingowa (opcjonalnie).</label>
+          </div>
+          <div style="margin-top:14px">
+            <button class="btn brand" type="submit">Pobierz e-book</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Quiz kierunkowy -->
+    <div id="quiz" class="anchor"></div>
+    <section class="wrap">
+      <div class="section-head">
+        <h3>Quiz kierunkowy</h3>
+        <div class="links">
+          <a class="pill" href="#kierunki">Wyniki a kierunki</a>
+        </div>
+      </div>
+      <div class="quiz card">
+        <div style="padding:16px">
+          <p class="mini">Odpowiedz na kilka pytań, aby otrzymać propozycje kierunków dopasowane do Twoich preferencji.</p>
+          <form onsubmit="event.preventDefault(); recommend();">
+            <label>Wolisz pracę analityczną czy kreatywną?</label>
+            <select id="q1">
+              <option>Analiza</option>
+              <option>Kreatywność</option>
+              <option>Połączenie obu</option>
+            </select>
+            <label style="margin-top:12px">Interesuje Cię praca z ludźmi?</label>
+            <select id="q2">
+              <option>Tak</option>
+              <option>Nie</option>
+              <option>W ograniczonym zakresie</option>
+            </select>
+            <button class="btn brand" type="submit" style="margin-top:14px">Pokaż propozycje</button>
+          </form>
+        </div>
+        <div style="padding:16px; border-left:1px solid rgba(255,255,255,.08)">
+          <div class="kicker">Propozycje</div>
+          <div id="quiz-results" class="list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filie -->
+    <div id="filie" class="anchor"></div>
+    <section class="wrap">
+      <div class="section-head">
+        <h3>Filie i siedziba główna</h3>
+        <div class="links">
+          <a class="pill" href="#kontakt">Kontakt do filii</a>
+        </div>
+      </div>
+      <div class="filie">
+        <div class="card filia">
+          <h4>Warszawa — siedziba główna</h4>
+          <div class="meta">ul. Przykładowa 1, 00-000 Warszawa</div>
+        </div>
+        <div class="card filia">
+          <h4>Poznań</h4>
+          <div class="meta">ul. Akademicka 2, 60-000 Poznań</div>
+        </div>
+        <div class="card filia">
+          <h4>Wrocław</h4>
+          <div class="meta">ul. Uniwersytecka 3, 50-000 Wrocław</div>
+        </div>
+        <div class="card filia">
+          <h4>Lublin</h4>
+          <div class="meta">ul. Naukowa 4, 20-000 Lublin</div>
+        </div>
+        <div class="card filia">
+          <h4>Szczecin</h4>
+          <div class="meta">ul. Morska 5, 70-000 Szczecin</div>
+        </div>
+        <div class="card filia">
+          <h4>Gdańsk</h4>
+          <div class="meta">ul. Portowa 6, 80-000 Gdańsk</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rekrutacja / Aplikuj -->
+    <div id="rekrutacja" class="anchor"></div>
+    <section class="wrap card">
+      <div class="section-head" style="padding:16px 16px 0;">
+        <h3>Rekrutacja i aplikacja</h3>
+      </div>
+      <div style="padding:0 16px 16px">
+        <p class="mini">Proces rekrutacji jest prosty: wypełnij formularz, dołącz wymagane dokumenty i oczekuj na kontakt.</p>
+        <form id="apply" onsubmit="event.preventDefault(); alert('Dziękujemy za zgłoszenie! Skontaktujemy się wkrótce.');">
+          <div class="form-row">
+            <div>
+              <label>Imię i nazwisko</label>
+              <input type="text" required placeholder="Jan Kowalski">
+            </div>
+            <div>
+              <label>E-mail</label>
+              <input type="email" required placeholder="jan.kowalski@example.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label>Preferowany kierunek</label>
+              <select required>
+                <option value="" disabled selected>— wybierz —</option>
+                <option>Psychologia</option>
+                <option>Prawo</option>
+                <option>Zarządzanie</option>
+                <option>Media i komunikacja</option>
+                <option>Administracja</option>
+                <option>Pedagogika</option>
+                <option>Kryminologia</option>
+                <option>Bezpieczeństwo</option>
+              </select>
+            </div>
+            <div>
+              <label>Tryb studiów</label>
+              <select required>
+                <option value="" disabled selected>— wybierz —</option>
+                <option>Stacjonarne</option>
+                <option>Zaoczne</option>
+                <option>Online</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:12px">
+            <button class="btn brand" type="submit">Aplikuj</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Kontakt -->
+    <div id="kontakt" class="anchor"></div>
+    <section class="wrap">
+      <div class="section-head">
+        <h3>Kontakt</h3>
+        <div class="links">
+          <a class="pill" href="#mapa">Mapa dojazdu</a>
+        </div>
+      </div>
+      <div class="card" style="padding:16px">
+        <div class="form-row">
+          <div>
+            <label>Imię</label>
+            <input type="text" placeholder="Twoje imię">
+          </div>
+          <div>
+            <label>E-mail</label>
+            <input type="email" placeholder="twoj.email@example.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>Temat</label>
+            <input type="text" placeholder="Zapytanie o rekrutację">
+          </div>
+          <div>
+            <label>Wiadomość</label>
+            <textarea rows="4" placeholder="Napisz w czym możemy pomóc"></textarea>
+          </div>
+        </div>
+        <button class="btn brand">Wyślij</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-grid">
+      <div>
+        <div class="brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#5b7cff"/>
+                <stop offset="1" stop-color="#34d399"/>
+              </linearGradient>
+            </defs>
+            <circle cx="32" cy="32" r="30" fill="url(#g2)" opacity=".2"/>
+            <path d="M12 42 L22 22 L32 34 L42 20 L52 42" fill="none" stroke="url(#g2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <strong>Uczelnia „Varsovia”</strong>
+            <div class="mini">Strona przykładowa do wklejenia w VS Code</div>
+          </div>
+        </div>
+        <p class="mini" style="margin-top:12px">
+          Materiały na tej stronie są przykładowe i służą celom demonstracyjnym. Treść, daty i adresy są generyczne.
+        </p>
+      </div>
+      <div>
+        <div class="links">
+          <a class="pill" href="#kierunki">Kierunki</a>
+          <a class="pill" href="#aktualnosci">Aktualności</a>
+          <a class="pill" href="#webinary">Webinary</a>
+          <a class="pill" href="#ebook">E-book</a>
+          <a class="pill" href="#quiz">Quiz</a>
+          <a class="pill" href="#filie">Filie</a>
+          <a class="pill" href="#kontakt">Kontakt</a>
+        </div>
+        <div class="mini" style="margin-top:10px">© 2025 Varsovia — Wszystkie prawa zastrzeżone (demo)</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Prosty slider
+    (function(){
+      const slider = document.getElementById('slider');
+      if(!slider) return;
+      const slides = slider.querySelector('.slides');
+      const ctrl = slider.querySelectorAll('.ctrl');
+      let index = 0;
+      const count = slides.children.length;
+      const go = (dir)=>{ index = (index + dir + count) % count; slides.style.transform = `translateX(-${index*100}%)`; }
+      ctrl.forEach(b=> b.addEventListener('click', ()=> go(Number(b.dataset.dir))));
+      // auto-play
+      setInterval(()=>go(1), 6000);
+    })();
+
+    // Quiz rekomendacje (proste, generyczne)
+    function recommend(){
+      const q1 = document.getElementById('q1').value;
+      const q2 = document.getElementById('q2').value;
+      const box = document.getElementById('quiz-results');
+      box.innerHTML = '';
+      const out = [];
+      if(q1 === 'Analiza') out.push('Zarządzanie', 'Administracja', 'Bezpieczeństwo');
+      if(q1 === 'Kreatywność') out.push('Media i komunikacja', 'Pedagogika');
+      if(q1 === 'Połączenie obu') out.push('Psychologia', 'Kryminologia', 'Prawo');
+      if(q2 === 'Tak') out.push('Psychologia', 'Pedagogika');
+      if(q2 === 'W ograniczonym zakresie') out.push('Zarządzanie', 'Administracja');
+
+      const uniq = [...new Set(out)];
+      if(uniq.length === 0){
+        const p = document.createElement('div');
+        p.className = 'row';
+        p.innerHTML = '<div class="dot"></div><div class="info"><div class="title">Brak dopasowania</div><div class="meta">Zmień odpowiedzi i spróbuj ponownie.</div></div>';
+        box.appendChild(p);
+      } else {
+        uniq.slice(0,5).forEach(k=>{
+          const row = document.createElement('div');
+          row.className = 'row';
+          row.innerHTML = '<div class="dot"></div><div class="info"><div class="title">'+k+'</div><div class="meta">Propozycja kierunku na podstawie Twoich odpowiedzi</div></div><a class="pill" href="#kierunki">Szczegóły</a>';
+          box.appendChild(row);
+        });
+      }
+    }
+
+    // Miękkie przewijanie do sekcji
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){
+          e.preventDefault();
+          window.scrollTo({top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior:'smooth'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
